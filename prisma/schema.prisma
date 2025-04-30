@@ -1,11 +1,11 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../prisma/generated"
+  output   = "../src/server/db/generated"
 }
 
 generator zod {
   provider = "zod-prisma-types"
-  output   = "../prisma/generated/types"
+  output   = "../src/server/db/generated/types"
 }
 
 datasource db {

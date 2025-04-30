@@ -1,5 +1,7 @@
 import { defineConfig } from "@tanstack/react-start/config";
 import tsConfigPaths from "vite-tsconfig-paths";
+import { config } from "dotenv";
+config({ path: "./.env" });
 export default defineConfig({
 	tsr: {
 		appDirectory: "src",

@@ -1,11 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@primsa-client/generated";
 
 import { env } from "@/env";
 
 const createPrismaClient = () => {
 	const client = new PrismaClient({
 		log:
-			env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+			env.NODE_ENV === "development"
+				? ["query", "error", "warn"]
+				: ["error"],
 	});
 	// client.$use(auditMiddleware as any);
 	return client;

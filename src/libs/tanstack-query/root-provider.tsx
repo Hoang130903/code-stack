@@ -5,7 +5,7 @@ import superjson from "superjson";
 
 import { TRPCProvider } from "../trpc/react";
 
-import type { TRPCRouter } from "../trpc/router";
+import type { TRPCRouter } from "../../server/trpc/routers";
 import { env } from "@/env";
 
 function getUrl() {
