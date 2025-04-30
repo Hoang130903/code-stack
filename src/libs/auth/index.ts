@@ -1,7 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { env } from "@/env";
+import { db } from "@server/db";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-const prisma = new PrismaClient();
 
 export const auth = betterAuth({
 	//...
@@ -10,20 +10,12 @@ export const auth = betterAuth({
 	},
 	socialProviders: {
 		google: {
-			clientId:
-				process.env.GOOGLE_CLIENT_ID ||
-				(() => {
-					throw new Error("GOOGLE_CLIENT_ID is not defined");
-				})(),
-			clientSecret:
-				process.env.GOOGLE_CLIENT_SECRET ||
-				(() => {
-					throw new Error("GOOGLE_CLIENT_ID is not defined");
-				})(),
+			clientId: env.GOOGLE_CLIENT_ID,
+			clientSecret: env.GOOGLE_CLIENT_SECRET,
 		},
 	},
-	database: prismaAdapter(prisma, {
-		provider: "sqlite", // or "mysql", "postgresql", ...etc
+	database: prismaAdapter(db, {
+		provider: "postgresql", // or "mysql", "postgresql", ...etc
 	}),
 	session: {
 		cookieCache: {

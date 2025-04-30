@@ -6,11 +6,12 @@ import superjson from "superjson";
 import { TRPCProvider } from "../trpc/react";
 
 import type { TRPCRouter } from "../trpc/router";
+import { env } from "@/env";
 
 function getUrl() {
 	const base = (() => {
 		if (typeof window !== "undefined") return "";
-		return `http://localhost:${process.env.PORT ?? 3000}`;
+		return env.SERVER_URL;
 	})();
 	return `${base}/api/trpc`;
 }

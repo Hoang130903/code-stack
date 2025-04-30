@@ -1,7 +1,7 @@
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
-import { routerWithQueryClient } from "@tanstack/react-router-with-query";
 import * as TanstackQuery from "@/libs/tanstack-query/root-provider";
+import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+import { routerWithQueryClient } from "@tanstack/react-router-with-query";
+import { routeTree } from "./routeTree.gen";
 
 export function createRouter() {
 	const router = routerWithQueryClient(
@@ -17,13 +17,11 @@ export function createRouter() {
 			scrollRestoration: true,
 			Wrap: (props: { children: React.ReactNode }) => {
 				return (
-					<TanstackQuery.Provider>
-						{props.children}
-					</TanstackQuery.Provider>
+					<TanstackQuery.Provider>{props.children}</TanstackQuery.Provider>
 				);
 			},
 		}),
-		TanstackQuery.getContext().queryClient
+		TanstackQuery.getContext().queryClient,
 	);
 
 	return router;

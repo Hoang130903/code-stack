@@ -7,7 +7,7 @@ const filePath = "count.txt";
 
 async function readCount() {
 	return Number.parseInt(
-		await fs.promises.readFile(filePath, "utf-8").catch(() => "0")
+		await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
 	);
 }
 

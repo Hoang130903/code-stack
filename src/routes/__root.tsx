@@ -1,4 +1,7 @@
 import { Provider } from "@/components/ui/provider";
+import TanstackQueryLayout from "@/libs/tanstack-query/layout";
+import type { TRPCRouter } from "@/libs/trpc/router";
+import type { QueryClient } from "@tanstack/react-query";
 import {
 	HeadContent,
 	Outlet,
@@ -6,11 +9,8 @@ import {
 	createRootRouteWithContext,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import TanstackQueryLayout from "@/libs/tanstack-query/layout";
-import type { ReactNode } from "react";
-import type { QueryClient } from "@tanstack/react-query";
 import type { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
-import type { TRPCRouter } from "@/libs/trpc/router";
+import type { ReactNode } from "react";
 interface MyRouterContext {
 	queryClient: QueryClient;
 
