@@ -3,10 +3,21 @@ import {
 	HeadContent,
 	Outlet,
 	Scripts,
-	createRootRoute,
+	createRootRouteWithContext,
 } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import TanstackQueryLayout from "@/libs/tanstack-query/layout";
 import type { ReactNode } from "react";
-export const Route = createRootRoute({
+import type { QueryClient } from "@tanstack/react-query";
+import type { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import type { TRPCRouter } from "@/libs/trpc/router";
+interface MyRouterContext {
+	queryClient: QueryClient;
+
+	trpc: TRPCOptionsProxy<TRPCRouter>;
+}
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
 		meta: [
 			{
@@ -29,6 +40,9 @@ function RootComponent() {
 		<RootDocument>
 			<Provider>
 				<Outlet />
+				<TanStackRouterDevtools />
+
+				<TanstackQueryLayout />
 			</Provider>
 		</RootDocument>
 	);
