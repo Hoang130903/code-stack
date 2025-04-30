@@ -5,8 +5,7 @@ import {
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
-import { ChakraProvider } from "@chakra-ui/react";
-import techTheme from "@/lib/theme";
+import { Provider } from "@/components/ui/provider";
 export const Route = createRootRoute({
 	head: () => ({
 		meta: [
@@ -28,9 +27,9 @@ export const Route = createRootRoute({
 function RootComponent() {
 	return (
 		<RootDocument>
-			<ChakraProvider theme={techTheme}>
+			<Provider>
 				<Outlet />
-			</ChakraProvider>
+			</Provider>
 		</RootDocument>
 	);
 }

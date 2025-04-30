@@ -2,7 +2,7 @@ import * as fs from "node:fs";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { Button } from "@chakra-ui/react";
-
+import { authClient } from "@/lib/auth/client";
 const filePath = "count.txt";
 
 async function readCount() {
@@ -32,18 +32,22 @@ export const Route = createFileRoute("/")({
 function Home() {
 	const router = useRouter();
 	const state = Route.useLoaderData();
-
+	const { data: session } = authClient.useSession();
+	console.log("session", session);
 	return (
-		<Button
-			type="button"
-			m={4}
-			onClick={() => {
-				updateCount({ data: 1 }).then(() => {
-					router.invalidate();
-				});
-			}}
-		>
-			Add 1 to {state}?
-		</Button>
+		<div>
+			<Button
+				type="button"
+				m={4}
+				onClick={() => {
+					updateCount({ data: 1 }).then(() => {
+						router.invalidate();
+					});
+				}}
+			>
+				Add 1 to {state}?
+			</Button>
+			<div>Hello {session?.user.name}</div>
+		</div>
 	);
 }
