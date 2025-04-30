@@ -146,12 +146,7 @@ export const mockProblems: Problem[] = [
 		id: "226",
 		title: "Invert Binary Tree",
 		difficulty: ProblemDifficulty.Easy,
-		tags: [
-			"Tree",
-			"Depth-First Search",
-			"Breadth-First Search",
-			"Recursion",
-		],
+		tags: ["Tree", "Depth-First Search", "Breadth-First Search", "Recursion"],
 		status: ProblemStatus.Solved,
 		acceptance: "73.1%",
 	},
@@ -192,5 +187,5 @@ export const mockProblems: Problem[] = [
 
 // Lấy tất cả các tag duy nhất từ mock data
 export const allTags = Array.from(
-	new Set(mockProblems.flatMap((p) => p.tags))
+	new Set(mockProblems.flatMap((p) => p.tags)),
 ).sort();

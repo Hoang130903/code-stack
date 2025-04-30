@@ -1,6 +1,6 @@
+import { trpcRouter } from "@/libs/trpc/router";
 import { createAPIFileRoute } from "@tanstack/react-start/api";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { trpcRouter } from "@/libs/trpc/router";
 
 function handler({ request }: { request: Request }) {
 	return fetchRequestHandler({

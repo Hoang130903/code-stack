@@ -3,6 +3,6 @@ import { createAPIFileRoute } from "@tanstack/react-start/api";
 
 export const APIRoute = createAPIFileRoute("/api/hello")({
 	GET: async ({ request }) => {
-		return new Response("Hello, World! from " + request.url);
+		return new Response(`Hello, World! from ${request.url}`);
 	},
 });

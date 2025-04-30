@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
-import {
-	Outlet,
-	createRootRoute,
-	HeadContent,
-	Scripts,
-} from "@tanstack/react-router";
 import { Provider } from "@/components/ui/provider";
+import {
+	HeadContent,
+	Outlet,
+	Scripts,
+	createRootRoute,
+} from "@tanstack/react-router";
+import type { ReactNode } from "react";
 export const Route = createRootRoute({
 	head: () => ({
 		meta: [
@@ -36,7 +36,7 @@ function RootComponent() {
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
 	return (
-		<html>
+		<html lang="vi">
 			<head>
 				<link
 					href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono&display=swap"

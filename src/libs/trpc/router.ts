@@ -7,7 +7,7 @@ const peopleRouter = {
 	list: publicProcedure.query(async () =>
 		fetch("https://swapi.dev/api/people")
 			.then((res) => res.json())
-			.then((d) => d.results as { name: string }[])
+			.then((d) => d.results as { name: string }[]),
 	),
 } satisfies TRPCRouterRecord;
 

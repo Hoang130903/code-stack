@@ -1,13 +1,13 @@
 import * as fs from "node:fs";
+import { authClient } from "@/lib/auth/client";
+import { Button } from "@chakra-ui/react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { Button } from "@chakra-ui/react";
-import { authClient } from "@/lib/auth/client";
 const filePath = "count.txt";
 
 async function readCount() {
-	return parseInt(
-		await fs.promises.readFile(filePath, "utf-8").catch(() => "0")
+	return Number.parseInt(
+		await fs.promises.readFile(filePath, "utf-8").catch(() => "0"),
 	);
 }
 
