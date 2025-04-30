@@ -15,6 +15,7 @@ bun.lock
 count.txt
 package-lock.json
 pnpm-lock.yaml
+src/server/db/generated
 yarn.lock
 *.db 
 *.sqlite
