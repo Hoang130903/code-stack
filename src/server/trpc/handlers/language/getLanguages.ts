@@ -1,5 +1,5 @@
 import { paginationQuerySchema } from "@/validations/paginationQuerySchema";
-import { z } from "better-auth";
+import z from "zod";
 
 const input = paginationQuerySchema.extend({
 	search: z.string().optional(),

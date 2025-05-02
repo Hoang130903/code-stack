@@ -1,5 +1,5 @@
-import { PrismaClient } from "@primsa-client/generated";
-
+import { PrismaClient } from "@prisma-app/client";
+// import "server-only";
 import { env } from "@/env";
 
 const createPrismaClient = () => {

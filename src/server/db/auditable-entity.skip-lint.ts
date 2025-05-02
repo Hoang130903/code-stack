@@ -1,4 +1,4 @@
-import { Prisma } from "@primsa-client/generated";
+import { Prisma } from "@prisma-app/client";
 
 // Tối ưu việc check model fields bằng Map
 const modelAuditFields = new Map<string, Set<string>>();

@@ -1,12 +1,12 @@
 import { readFileSync } from "node:fs";
 import { env } from "@/env";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { PrismaClient } from "@primsa-client/generated";
+import { PrismaClient } from "@prisma-app/client";
 const genAI = new GoogleGenerativeAI(env.GEMINI_API_KEY ?? "");
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 const prompt = readFileSync(
 	"C:/Users/BaoBao/Desktop/code-master/src/constants/prompts/translate_leetcode_title.txt",
-	"utf-8",
+	"utf-8"
 );
 
 const chatSession = model.startChat({

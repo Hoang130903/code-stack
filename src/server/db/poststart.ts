@@ -1,5 +1,5 @@
 import type { createMongoAbility } from "@casl/ability";
-import { type Prisma, PrismaClient } from "@prisma/client";
+import { type Prisma, PrismaClient } from "@prisma-app/client";
 const db = new PrismaClient();
 const subject: Prisma.ResourceCreateInput[] = [
 	{

@@ -1,4 +1,4 @@
-import type { Language as PrismaLanguage } from "@primsa-client/generated";
+import type { Language as PrismaLanguage } from "@prisma-app/client";
 import { z } from "zod";
 
 export const createLanguageSchema = z.object({

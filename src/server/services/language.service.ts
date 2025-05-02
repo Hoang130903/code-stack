@@ -1,5 +1,5 @@
 import type { PaginationQuery } from "@/validations/paginationQuerySchema";
-import type { PrismaClient, Prisma } from "@primsa-client/generated";
+import type { PrismaClient, Prisma } from "@prisma-app/client";
 
 import type {
 	CreateLanguageDTO,

@@ -18,7 +18,7 @@
 		"noUncheckedSideEffectImports": true,
 		"paths": {
 			"@/*": ["./src/*"],
-			"@primsa-client/*": ["./src/server/db/*"],
+			"@db/*": ["./src/server/db/*"],
 			"@server/*": ["./src/server/*"]
 		}
 	}
