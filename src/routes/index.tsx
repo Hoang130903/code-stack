@@ -3,8 +3,7 @@ import { authClient } from "@/libs/auth/client";
 import { Button } from "@chakra-ui/react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { useQuery } from "@tanstack/react-query";
-import { useTRPC } from "@/libs/trpc/react";
+
 const filePath = "count.txt";
 
 async function readCount() {
@@ -19,6 +18,7 @@ const getCount = createServerFn({
 	return readCount();
 });
 
+
 const updateCount = createServerFn({ method: "POST" })
 	.validator((d: number) => d)
 	.handler(async ({ data }) => {
@@ -32,9 +32,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-	const trpc = useTRPC();
-	const a = useQuery(trpc.language.getLanguages.queryOptions({}));
-	console.log("a", a);
+
+
 	const router = useRouter();
 	const state = Route.useLoaderData();
 	const { data: session } = authClient.useSession();
