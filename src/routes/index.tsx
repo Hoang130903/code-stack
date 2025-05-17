@@ -1,573 +1,483 @@
-import { createFileRoute, Link as TanStackLink } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Box,
   Button,
   Container,
   Flex,
-  Grid,
-  GridItem,
   Heading,
   HStack,
   Icon,
-  IconButton,
-  Link,
+  Image,
   SimpleGrid,
   Stack,
   Text,
-  VStack, useBreakpointValue,
-  chakra,
-  useChakraContext
+  VStack,
+  Separator as Divider,
+  chakra
 } from "@chakra-ui/react";
+
 import {
-  FaGithub,
-  FaPuzzlePiece,
-  FaTrophy,
-  FaUsers, FaRocket, FaChartLine,
-  FaBookOpen, FaSignInAlt, FaBars
-} from "react-icons/fa";
-import { FiChevronRight } from "react-icons/fi";
-import { useState } from "react";
+  FiGithub,
+  FiUsers,
+  FiAward,
+  FiCode,
+  FiPlayCircle,
+  FiTarget,
+  FiMessageSquare, FiTrendingUp,
+  FiBookOpen,
+  FiStar
+} from "react-icons/fi";
+import { FaFacebook, FaTwitter, FaLinkedin, FaGithub } from "react-icons/fa";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
-const Logo = () => (
-  <Heading as="h1" size="lg" color="text-primary">
-    CodeMaster
-  </Heading>
-);
+// Header Component
+const Header = () => {
+  const bg = useColorModeValue("white", "gray.800");
+  const color = useColorModeValue("gray.800", "white");
 
-function Landing() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const displayMobileMenu = useBreakpointValue({ base: "block", md: "none" });
-  const displayDesktopMenu = useBreakpointValue({ base: "none", md: "block" });
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
-  const navItems = [
-    { label: "Tính Năng", href: "#features" },
-    { label: "Thử Thách", href: "#problems" },
-    { label: "Cuộc Thi", href: "#contests" },
-    { label: "Cộng Đồng", href: "#community" },
-  ];
-  const system = useChakraContext();
   return (
-    <Box bg="background" color="text" minH="100vh"
-    style={ system.css({ colorPalette: 'green' })}>
-     
-      <Box
-        as="header"
-        py={4}
-        px={{ base: 4, md: 8 }}
-        borderBottomWidth="1px"
-        borderColor="border-subtle"
-        bg="background"
-      >
-        <Container maxW="container.xl">
-          <Flex justify="space-between" align="center">
-            <TanStackLink to="/">
-              <Logo />
-            </TanStackLink>
-
-            <HStack as="nav" borderSpacing={6} display={displayDesktopMenu}>
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  fontWeight="medium"
-                  color="text-subtle"
-                  _hover={{ color: "text-primary", textDecoration: "none" }}
-                >
-                  {item.label}
-                </Link>
-              ))}
+    <Box
+      as="header"
+      py={4}
+      px={{ base: 4, md: 8 }}
+      bg={bg}
+      boxShadow="sm"
+      position="sticky"
+      top="0"
+      zIndex="sticky"
+    >
+      <Container maxW="container.xl">
+        <Flex justifyContent="space-between" alignItems="center">
+          <Link to="/">
+            <HStack borderSpacing={2}>
+              <Icon as={FiCode} w={8} h={8} color="teal.500" />
+              <Heading as="h1" size="lg" color={color} letterSpacing="tight">
+                CodeMaster
+              </Heading>
             </HStack>
-
-            <HStack borderSpacing={3} display={displayDesktopMenu}>
-              <Button
-                as={TanStackLink}
-                to="/auth/login"
-                variant="ghost"
-                colorPalette="brand"
-                leftIcon={<FaSignInAlt />}
-                size="sm"
-                color="text-primary"
-              >
-                Đăng Nhập
-              </Button>
-              <Button
-               variant={'solid'}
-                size="sm"
-              >
-                Đăng Ký với GitHubádas
-              </Button>
-            </HStack>
-
-            <IconButton
-              aria-label="Mở menu"
-              display={displayMobileMenu}
-              onClick={toggleMobileMenu}
+          </Link>
+          <HStack borderSpacing={{ base: 2, md: 4 }}>
+            <Button
+              as={Link}
+              // @ts-ignore // Link props might not perfectly match Button's as prop
+              to="/login" // Replace with your actual login route
               variant="ghost"
-              color="text"
+              colorScheme="teal"
+              size="sm"
+              leftIcon={<FiGithub />}
             >
-              <FaBars />
-            </IconButton>
-          </Flex>
-
-          {isMobileMenuOpen && (
-            <VStack
-              as="nav"
-              display={displayMobileMenu}
-              py={4}
-              borderSpacing={4}
-              bg="background"
-              position="absolute"
-              top="68px"
-              left={0}
-              right={0}
-              zIndex={20}
-              boxShadow="md"
-              borderBottomWidth="1px"
-              borderColor="border-subtle"
+              Đăng nhập
+            </Button>
+            <Button
+              as={Link}
+              // @ts-ignore
+              to="/signup" // Replace with your actual signup route
+              colorScheme="teal"
+              size="sm"
             >
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  w="full"
-                  textAlign="center"
-                  py={3}
-                  _hover={{ bg: "background-muted" }}
-                  onClick={toggleMobileMenu}
-                  color="text"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Button
-                as={TanStackLink}
-                to="/auth/login"
-                variant="outline"
-                colorPalette="brand"
-                leftIcon={<FaSignInAlt />}
-                w="80%"
-                onClick={toggleMobileMenu}
-              >
-                Đăng Nhập
-              </Button>
-              <Button
-                as={TanStackLink}
-                to="/auth/register-github"
-                colorPalette="brand"
-                leftIcon={<FaGithub />}
-                w="80%"
-                onClick={toggleMobileMenu}
-              >
-                Đăng Ký với GitHub
-              </Button>
-            </VStack>
-          )}
-        </Container>
-      </Box>
+              Đăng ký
+            </Button>
+          </HStack>
+        </Flex>
+      </Container>
+    </Box>
+  );
+};
 
-      <Container
-        maxW="container.xl"
-        py={{ base: 16, md: 28 }}
-        px={{ base: 6, md: 8 }}
+// Hero Component
+const HeroSection = () => {
+  return (
+    <Container maxW="container.xl" py={{ base: 12, md: 24 }}>
+      <Flex
+        direction={{ base: "column-reverse", md: "row" }}
+        alignItems="center"
+        justifyContent="space-between"
+        gap={8}
       >
         <VStack
-          borderSpacing={{ base: 6, md: 8 }}
-          textAlign="center"
-          alignItems="center"
+          alignItems={{ base: "center", md: "flex-start" }}
+          borderSpacing={6}
+          textAlign={{ base: "center", md: "left" }}
+          flex="1"
         >
           <Heading
             as="h2"
-            size={{ base: "2xl", md: "4xl" }}
-            fontWeight="extrabold"
-            lineHeight="tight"
-            color="text"
+            size={{ base: "xl", md: "2xl", lg: "3xl" }}
+            fontWeight="bold"
+            lineHeight="shorter"
           >
-            Chinh Phục Mọi Thử Thách Lập Trình với{" "}
-            <chakra.span color="primary">CodeMaster</chakra.span>!
+            Nâng Tầm Kỹ Năng Lập Trình Của Bạn với{" "}
+            <chakra.span color="teal.500">CodeMaster</chakra.span>
           </Heading>
-          <Text
-            fontSize={{ base: "lg", md: "xl" }}
-            maxW="3xl"
-            color="text-subtle"
-          >
-            Nâng tầm kỹ năng, giải quyết thuật toán, tham gia cuộc thi gay cấn
-            và kết nối với cộng đồng lập trình viên tài năng. Bắt đầu hành trình
-            của bạn ngay hôm nay!
+          <Text fontSize={{ base: "lg", md: "xl" }} color={useColorModeValue("gray.600", "gray.300")}>
+            Thực hành giải thuật, tham gia thử thách code, và chinh phục các cuộc thi lập trình.
+            Xây dựng một cộng đồng vững mạnh và đạt được mục tiêu của bạn!
           </Text>
           <Stack
             direction={{ base: "column", sm: "row" }}
             borderSpacing={4}
-            justify="center"
-            w="full"
-            maxW="lg"
-            pt={4}
+            w={{ base: "full", md: "auto" }}
           >
             <Button
-              as={TanStackLink}
-              colorPalette="brand"
+              as={Link}
+              // @ts-ignore
+              to="/signup"
+              colorScheme="teal"
               size="lg"
-              w={{ base: "full", sm: "auto" }}
               px={8}
-              py={7}
-              boxShadow="md"
-              _hover={{ boxShadow: "lg", bg: "brand.600" }}
+              leftIcon={<FiGithub />}
             >
-              <FaGithub />
-              Đăng Ký Miễn Phí qua GitHub
+              Bắt Đầu Ngay với GitHub
             </Button>
             <Button
-              as={TanStackLink}
+              as={Link}
+              // @ts-ignore
+              to="/problems" // Replace with your problems page route
               variant="outline"
-              colorPalette="brand"
+              colorScheme="teal"
               size="lg"
-              w={{ base: "full", sm: "auto" }}
               px={8}
-              py={7}
-              borderColor="primary"
-              color="text-primary"
-              _hover={{ bg: "primary-subtle-bg" }}
+              leftIcon={<FiBookOpen />}
             >
-              <FaPuzzlePiece />
               Khám Phá Bài Tập
             </Button>
           </Stack>
-          <Text fontSize="sm" color="text-muted" pt={2}>
-            Tham gia cùng hàng ngàn lập trình viên đang rèn luyện mỗi ngày.
+        </VStack>
+        <Box flex="1" display={{ base: "none", md: "block" }}>
+          {/* Placeholder for a relevant image or illustration */}
+          <Image
+            src="https://placewaifu.com/image/600/300"
+            alt="CodeMaster Illustration"
+            rounded="lg"
+            boxShadow="xl"
+          />
+        </Box>
+      </Flex>
+    </Container>
+  );
+};
+
+// Features Component
+interface FeatureCardProps {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+}
+
+const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
+  return (
+    <VStack
+      bg={useColorModeValue("gray.50", "gray.700")}
+      p={6}
+      rounded="lg"
+      borderSpacing={4}
+      alignItems="flex-start"
+      boxShadow="md"
+      transition="all 0.3s"
+      _hover={{ boxShadow: "xl", transform: "translateY(-5px)" }}
+    >
+      <Icon as={icon} w={10} h={10} color="teal.500" />
+      <Heading as="h3" size="md" fontWeight="semibold">
+        {title}
+      </Heading>
+      <Text color={useColorModeValue("gray.600", "gray.300")}>
+        {description}
+      </Text>
+    </VStack>
+  );
+};
+
+const FeaturesSection = () => {
+  const features: FeatureCardProps[] = [
+    {
+      icon: FiTarget,
+      title: "Bài Tập Đa Dạng",
+      description: "Hàng ngàn bài tập thuật toán từ cơ bản đến nâng cao, giúp bạn rèn luyện tư duy logic và kỹ năng giải quyết vấn đề.",
+    },
+    {
+      icon: FiAward,
+      title: "Cuộc Thi Hấp Dẫn",
+      description: "Tham gia các cuộc thi lập trình định kỳ, thử thách bản thân và cạnh tranh với các lập trình viên khác.",
+    },
+    {
+      icon: FiTrendingUp,
+      title: "Theo Dõi Tiến Độ",
+      description: "Theo dõi tiến trình học tập của bạn, xem lại lịch sử bài làm và nhận phân tích chi tiết để cải thiện.",
+    },
+    {
+      icon: FiUsers,
+      title: "Cộng Đồng Năng Động",
+      description: "Kết nối, học hỏi và chia sẻ kinh nghiệm với cộng đồng lập trình viên trên khắp thế giới.",
+    },
+    {
+      icon: FiPlayCircle,
+      title: "Hướng Dẫn Trực Quan",
+      description: "Các bài giải chi tiết và video hướng dẫn giúp bạn hiểu sâu hơn về các thuật toán và cấu trúc dữ liệu.",
+    },
+    {
+      icon: FiMessageSquare,
+      title: "Thảo Luận & Hỗ Trợ",
+      description: "Tham gia thảo luận về các bài toán, đặt câu hỏi và nhận được sự hỗ trợ từ cộng đồng và các chuyên gia.",
+    },
+  ];
+
+  return (
+    <Box bg={useColorModeValue("gray.100", "gray.900")} py={{ base: 12, md: 20 }}>
+      <Container maxW="container.xl">
+        <VStack borderSpacing={4} textAlign="center" mb={10}>
+          <Heading as="h2" size="xl" fontWeight="bold">
+            Tại Sao Chọn <chakra.span color="teal.500">CodeMaster</chakra.span>?
+          </Heading>
+          <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.300")} maxW="2xl">
+            CodeMaster cung cấp một nền tảng toàn diện để bạn không chỉ học lập trình mà còn trở thành một chuyên gia giải quyết vấn đề.
           </Text>
         </VStack>
-
-        <Box as="section" id="features" py={{ base: 20, md: 28 }}>
-          <VStack
-            borderSpacing={4}
-            textAlign="center"
-            mb={{ base: 12, md: 20 }}
-          >
-            <Text
-              color="primary"
-              fontWeight="semibold"
-              textTransform="uppercase"
-              letterSpacing="wider"
-            >
-              Tính Năng Vượt Trội
-            </Text>
-            <Heading as="h3" size={{ base: "xl", md: "2xl" }} color="text">
-              Tại Sao Chọn CodeMaster?
-            </Heading>
-          </VStack>
-          <SimpleGrid
-            columns={{ base: 1, md: 2, lg: 4 }}
-            gap={{
-              base: 8,
-              md: 10,
-            }}
-          >
-            {[
-              {
-                icon: FaBookOpen,
-                title: "Thư Viện Bài Tập Khổng Lồ",
-                text: "Hàng ngàn bài toán từ cơ bản đến nâng cao, đa dạng chủ đề và độ khó cập nhật liên tục.",
-              },
-              {
-                icon: FaTrophy,
-                title: "Cuộc Thi Hấp Dẫn",
-                text: "Tham gia các cuộc thi định kỳ, đối đầu trực tiếp và giành lấy vinh quang cùng nhiều phần thưởng giá trị.",
-              },
-              {
-                icon: FaUsers,
-                title: "Cộng Đồng Sôi Nổi",
-                text: "Kết nối, học hỏi và chia sẻ kinh nghiệm với cộng đồng lập trình viên đam mê từ khắp nơi.",
-              },
-              {
-                icon: FaChartLine,
-                title: "Theo Dõi Tiến Độ Chi Tiết",
-                text: "Phân tích kỹ năng, theo dõi sự tiến bộ qua biểu đồ trực quan và xác định điểm cần cải thiện.",
-              },
-            ].map((feature) => (
-              <VStack
-                key={feature.title}
-                borderSpacing={5}
-                p={8}
-                layerStyle="card"
-                alignItems="flex-start"
-              >
-                <Icon as={feature.icon} w={12} h={12} color="primary" />
-                <Heading as="h4" size="md" color="text">
-                  {feature.title}
-                </Heading>
-                <Text color="text-subtle" lineHeight="tall">
-                  {feature.text}
-                </Text>
-              </VStack>
-            ))}
-          </SimpleGrid>
-        </Box>
-
-        <Box
-          as="section"
-          id="problems"
-          py={{ base: 20, md: 28 }}
-          bg="background-subtle"
-          mx={{ base: -6, md: -8 }}
-          px={{ base: 6, md: 8 }}
-        >
-          <VStack
-            borderSpacing={4}
-            textAlign="center"
-            mb={{ base: 12, md: 20 }}
-          >
-            <Text
-              color="primary"
-              fontWeight="semibold"
-              textTransform="uppercase"
-              letterSpacing="wider"
-            >
-              Khám Phá Thử Thách
-            </Text>
-            <Heading as="h3" size={{ base: "xl", md: "2xl" }} color="text">
-              Những Bài Toán Nổi Bật
-            </Heading>
-            <Text maxW="xl" color="text-subtle">
-              Rèn luyện tư duy logic và kỹ năng giải quyết vấn đề với các dạng
-              bài tập phổ biến, được tuyển chọn kỹ lưỡng.
-            </Text>
-          </VStack>
-          <Grid
-            templateColumns={{
-              base: "repeat(1, 1fr)",
-              md: "repeat(2, 1fr)",
-              lg: "repeat(3, 1fr)",
-            }}
-            gap={8}
-          >
-            {[
-              {
-                title: "Tìm Đường Đi Ngắn Nhất",
-                difficulty: "Trung bình",
-                tags: ["Graph", "BFS", "Dijkstra"],
-              },
-              {
-                title: "Sắp Xếp Mảng Hiệu Quả",
-                difficulty: "Dễ",
-                tags: ["Array", "Sorting"],
-              },
-              {
-                title: "Bài Toán Ba Lô Kinh Điển",
-                difficulty: "Khó",
-                tags: ["Dynamic Programming"],
-              },
-              {
-                title: "Xử Lý Chuỗi Nâng Cao",
-                difficulty: "Trung bình",
-                tags: ["String", "Algorithm"],
-              },
-              {
-                title: "Cấu Trúc Dữ Liệu Cây",
-                difficulty: "Dễ",
-                tags: ["Tree", "Data Structure"],
-              },
-              {
-                title: "Quy Hoạch Động Cơ Bản",
-                difficulty: "Trung bình",
-                tags: ["DP", "入门"],
-              },
-            ].map((problem, index) => (
-              <GridItem
-                key={index}
-                p={6}
-                layerStyle="card"
-                transition="all 0.2s ease-in-out"
-                _hover={{ boxShadow: "lg", transform: "translateY(-4px)" }}
-              >
-                <Heading as="h4" size="md" mb={3} color="text">
-                  {problem.title}
-                </Heading>
-                <Text fontSize="sm" color="text-muted" mb={4}>
-                  Độ khó: {problem.difficulty}
-                </Text>
-                <HStack borderSpacing={2} wrap="wrap" mb={4}>
-                  {problem.tags.map((tag) => (
-                    <chakra.span
-                      key={tag}
-                      px={3}
-                      py={1}
-                      bg="primary-subtle-bg"
-                      color="text-primary"
-                      borderRadius="md"
-                      fontSize="xs"
-                      fontWeight="medium"
-                    >
-                      {tag}
-                    </chakra.span>
-                  ))}
-                </HStack>
-                <Button
-                  as={TanStackLink}
-                  to={`/problems/${problem.title.toLowerCase().replace(/\s+/g, "-")}`}
-                  mt={4}
-                  size="sm"
-                  colorPalette="brand"
-                  variant="outline"
-                  rightIcon={<FiChevronRight />}
-                >
-                  Thử Sức Ngay
-                </Button>
-              </GridItem>
-            ))}
-          </Grid>
-          <VStack mt={10}>
-            <Button
-              as={TanStackLink}
-              to="/problems"
-              colorPalette="brand"
-              variant="ghost"
-              size="lg"
-              rightIcon={<FiChevronRight />}
-              color="text-primary"
-            >
-              Xem Tất Cả Bài Tập
-            </Button>
-          </VStack>
-        </Box>
-
-        <Box as="section" id="cta" py={{ base: 20, md: 32 }}>
-          <VStack
-            borderSpacing={8}
-            textAlign="center"
-            layerStyle="cta-section"
-            p={{ base: 10, md: 20 }}
-            borderRadius="xl"
-            boxShadow="xl"
-          >
-            <Heading
-              as="h3"
-              size={{ base: "xl", md: "3xl" }}
-              fontWeight="bold"
-              color="text-primary"
-            >
-              Sẵn Sàng Bứt Phá Giới Hạn Bản Thân?
-            </Heading>
-            <Text
-              fontSize={{ base: "md", md: "lg" }}
-              maxW="2xl"
-              color="primary-subtle-fg"
-            >
-              Đừng chần chừ! Tham gia CodeMaster ngay hôm nay để bắt đầu hành
-              trình chinh phục thế giới thuật toán và trở thành một lập trình
-              viên xuất sắc.
-            </Text>
-            <Button
-              as={TanStackLink}
-              to="/auth/register-github"
-              colorPalette="accent"
-              size="lg"
-              leftIcon={<FaRocket />}
-              px={12}
-              py={8}
-              fontSize="lg"
-              boxShadow="lg"
-              _hover={{ bg: "accent.600", transform: "translateY(-2px)" }}
-            >
-              Tham Gia Ngay Với GitHub!
-            </Button>
-          </VStack>
-        </Box>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={8}>
+          {features.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
+          ))}
+        </SimpleGrid>
       </Container>
+    </Box>
+  );
+};
 
-      <Box
-        as="footer"
-        bg="background-muted"
-        color="text-subtle"
-        py={12}
-        px={{ base: 6, md: 8 }}
-      >
-        <Container maxW="container.xl">
-          <SimpleGrid
-            columns={{ base: 1, sm: 2, md: 4 }}
-            borderSpacing={10}
-            mb={10}
-          >
-            <VStack alignItems="flex-start" borderSpacing={4}>
-              <Logo />
-              <Text fontSize="sm" lineHeight="tall">
-                Nền tảng rèn luyện kỹ năng lập trình và thuật toán hàng đầu,
-                giúp bạn tự tin chinh phục mọi thử thách.
-              </Text>
-            </VStack>
-            <VStack alignItems="flex-start" borderSpacing={4}>
-              <Heading as="h5" size="sm" color="text">
-                Sản phẩm
-              </Heading>
-              <Link href="#features" _hover={{ color: "text-primary" }}>
-                Tính Năng
-              </Link>
-              <Link href="#problems" _hover={{ color: "text-primary" }}>
-                Bài Tập
-              </Link>
-              <Link href="#contests" _hover={{ color: "text-primary" }}>
-                Cuộc Thi
-              </Link>
-              <Link href="/pricing" _hover={{ color: "text-primary" }}>
-                Gói Dịch Vụ
-              </Link>
-            </VStack>
-            <VStack alignItems="flex-start" borderSpacing={4}>
-              <Heading as="h5" size="sm" color="text">
-                Công ty
-              </Heading>
-              <Link href="/about" _hover={{ color: "text-primary" }}>
-                Về Chúng Tôi
-              </Link>
-              <Link href="/blog" _hover={{ color: "text-primary" }}>
-                Blog
-              </Link>
-              <Link href="/careers" _hover={{ color: "text-primary" }}>
-                Tuyển Dụng
-              </Link>
-              <Link href="/contact" _hover={{ color: "text-primary" }}>
-                Liên Hệ
-              </Link>
-            </VStack>
-            <VStack alignItems="flex-start" borderSpacing={4}>
-              <Heading as="h5" size="sm" color="text">
-                Pháp lý
-              </Heading>
-              <Link href="/terms" _hover={{ color: "text-primary" }}>
-                Điều Khoản Dịch Vụ
-              </Link>
-              <Link href="/privacy" _hover={{ color: "text-primary" }}>
-                Chính Sách Bảo Mật
-              </Link>
-              <Link href="/cookies" _hover={{ color: "text-primary" }}>
-                Chính Sách Cookie
-              </Link>
-            </VStack>
-          </SimpleGrid>
-          <Flex
-            direction={{ base: "column-reverse", md: "row" }}
-            justify="space-between"
-            align="center"
-            borderTopWidth="1px"
-            borderColor="border"
-            pt={8}
-          >
-            <Text fontSize="sm" mt={{ base: 6, md: 0 }}>
-              &copy; {new Date().getFullYear()} CodeMaster. Mọi quyền được bảo
-              lưu.
+// Problems Preview Component
+interface ProblemItemProps {
+  title: string;
+  difficulty: "Dễ" | "Trung bình" | "Khó";
+  tags: string[];
+}
+
+const ProblemItem = ({ title, difficulty, tags }: ProblemItemProps) => {
+  const difficultyColor = {
+    "Dễ": "green.500",
+    "Trung bình": "orange.500",
+    "Khó": "red.500",
+  };
+
+  return (
+    <Flex
+      justifyContent="space-between"
+      alignItems="center"
+      p={4}
+      bg={useColorModeValue("white", "gray.700")}
+      rounded="md"
+      boxShadow="sm"
+      _hover={{ boxShadow: "md" }}
+    >
+      <VStack alignItems="flex-start" borderSpacing={1}>
+        <Heading as="h4" size="sm">
+          {title}
+        </Heading>
+        <HStack borderSpacing={2}>
+          {tags.map((tag) => (
+            <Text key={tag} fontSize="xs" color="gray.500" _dark={{ color: "gray.400" }}>
+              #{tag}
             </Text>
-            <HStack borderSpacing={5}>
-              <Link href="https://github.com/your-org/codemaster">
-                <Icon
-                  as={FaGithub}
-                  boxSize={5}
-                  _hover={{ color: "text-primary" }}
-                />
-              </Link>
+          ))}
+        </HStack>
+      </VStack>
+      <Text fontSize="sm" fontWeight="medium" color={difficultyColor[difficulty]}>
+        {difficulty}
+      </Text>
+    </Flex>
+  );
+};
+
+const ProblemsPreviewSection = () => {
+  const sampleProblems: ProblemItemProps[] = [
+    { title: "Tìm tổng hai số", difficulty: "Dễ", tags: ["Mảng", "Toán học"] },
+    { title: "Đảo ngược chuỗi", difficulty: "Dễ", tags: ["Chuỗi"] },
+    { title: "Tìm đường đi ngắn nhất", difficulty: "Trung bình", tags: ["Đồ thị", "BFS"] },
+    { title: "Sắp xếp Topo", difficulty: "Khó", tags: ["Đồ thị", "DFS"] },
+  ];
+
+  return (
+    <Container maxW="container.lg" py={{ base: 12, md: 20 }}>
+      <VStack borderSpacing={4} textAlign="center" mb={10}>
+        <Heading as="h2" size="xl" fontWeight="bold">
+          Thử Thách Bản Thân Với Các Bài Tập Nổi Bật
+        </Heading>
+        <Text fontSize="lg" color={useColorModeValue("gray.600", "gray.300")}>
+          Khám phá một vài ví dụ về các dạng bài tập bạn có thể tìm thấy trên CodeMaster.
+        </Text>
+      </VStack>
+      <Stack borderSpacing={4}>
+        {sampleProblems.map((problem, index) => (
+          <ProblemItem key={index} {...problem} />
+        ))}
+      </Stack>
+      <Flex justifyContent="center" mt={8}>
+        <Button
+          as={Link}
+          // @ts-ignore
+          to="/problems"
+          colorScheme="teal"
+          variant="outline"
+          size="lg"
+          rightIcon={<FiCode />}
+        >
+          Xem Tất Cả Bài Tập
+        </Button>
+      </Flex>
+    </Container>
+  );
+};
+
+
+// Testimonials Section (Optional but recommended)
+interface TestimonialCardProps {
+  name: string;
+  role: string;
+  avatar: string;
+  testimonial: string;
+}
+
+const TestimonialCard = ({ name, role, avatar, testimonial }: TestimonialCardProps) => {
+  return (
+    <VStack
+      bg={useColorModeValue("white", "gray.700")}
+      p={8}
+      rounded="lg"
+      borderSpacing={5}
+      alignItems="center"
+      textAlign="center"
+      boxShadow="xl"
+    >
+      <Image src={avatar} alt={name} rounded="full" boxSize="80px" objectFit="cover" />
+      <Text fontWeight="medium" fontSize="lg">{testimonial}</Text>
+      <VStack borderSpacing={0}>
+        <Text fontWeight="bold" fontSize="md">{name}</Text>
+        <Text fontSize="sm" color={useColorModeValue("gray.500", "gray.400")}>{role}</Text>
+      </VStack>
+    </VStack>
+  );
+};
+
+
+
+// CTA Section
+const CTASection = () => {
+  return (
+    <Box bg="teal.500" color="white" py={{ base: 12, md: 20 }}>
+      <Container maxW="container.md" textAlign="center">
+        <VStack borderSpacing={6}>
+          <Heading as="h2" size={{ base: "lg", md: "xl" }} fontWeight="bold">
+            Sẵn Sàng Chinh Phục Thử Thách?
+          </Heading>
+          <Text fontSize={{ base: "md", md: "lg" }}>
+            Tham gia CodeMaster ngay hôm nay để bắt đầu hành trình trở thành một chuyên gia lập trình.
+            Đăng ký miễn phí và trải nghiệm!
+          </Text>
+          <Button
+            as={Link}
+            // @ts-ignore
+            to="/signup"
+            bg={useColorModeValue("white", "gray.800")}
+            color={useColorModeValue("teal.500", "white")}
+            size="lg"
+            px={10}
+            _hover={{ bg: useColorModeValue("gray.100", "gray.700") }}
+            leftIcon={<FiStar />}
+          >
+            Tham Gia Miễn Phí
+          </Button>
+        </VStack>
+      </Container>
+    </Box>
+  );
+};
+
+// Footer Component
+const Footer = () => {
+  const year = new Date().getFullYear();
+  return (
+    <Box bg={useColorModeValue("gray.100", "gray.900")} color={useColorModeValue("gray.700", "gray.200")}>
+      <Container maxW="container.xl" py={10}>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          borderSpacing={8}
+          justifyContent="space-between"
+          alignItems={{ base: "center", md: "flex-start" }}
+        >
+          <VStack borderSpacing={3} alignItems={{ base: "center", md: "flex-start" }}>
+            <HStack borderSpacing={2}>
+              <Icon as={FiCode} w={7} h={7} color="teal.500" />
+              <Heading as="h3" size="md">
+                CodeMaster
+              </Heading>
             </HStack>
-          </Flex>
-        </Container>
-      </Box>
+            <Text fontSize="sm" maxW="sm" textAlign={{ base: "center", md: "left" }}>
+              Nền tảng hàng đầu cho việc học và rèn luyện kỹ năng lập trình, giải thuật.
+            </Text>
+          </VStack>
+
+          <HStack borderSpacing={{ base: 6, md: 12 }} wrap="wrap" justifyContent={{ base: "center", md: "flex-start" }}>
+            <VStack alignItems={{ base: "center", md: "flex-start" }} borderSpacing={3}>
+              <Text fontWeight="semibold">Sản phẩm</Text>
+              <Link to="/problems">Bài tập</Link>
+              <Link to="/contests">Cuộc thi</Link>
+              <Link to="/community">Cộng đồng</Link>
+            </VStack>
+            <VStack alignItems={{ base: "center", md: "flex-start" }} borderSpacing={3}>
+              <Text fontWeight="semibold">Công ty</Text>
+              <Link to="/about">Về chúng tôi</Link>
+              <Link to="/careers">Tuyển dụng</Link>
+              <Link to="/contact">Liên hệ</Link>
+            </VStack>
+            <VStack alignItems={{ base: "center", md: "flex-start" }} borderSpacing={3}>
+              <Text fontWeight="semibold">Hỗ trợ</Text>
+              <Link to="/faq">FAQ</Link>
+              <Link to="/terms">Điều khoản</Link>
+              <Link to="/privacy">Chính sách</Link>
+            </VStack>
+          </HStack>
+        </Stack>
+        <Divider my={8} />
+        <Flex
+          direction={{ base: "column-reverse", md: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+          gap={4}
+        >
+          <Text fontSize="sm">
+            &copy; {year} CodeMaster. Đã đăng ký bản quyền.
+          </Text>
+          <HStack borderSpacing={4}>
+            <Link href="#" >
+              <Icon as={FaGithub} boxSize={5} />
+            </Link>
+            <Link href="#" >
+              <Icon as={FaTwitter} boxSize={5} />
+            </Link>
+            <Link href="#" >
+              <Icon as={FaLinkedin} boxSize={5} />
+            </Link>
+            <Link href="#" >
+              <Icon as={FaFacebook} boxSize={5} />
+            </Link>
+          </HStack>
+        </Flex>
+      </Container>
+    </Box>
+  );
+};
+
+
+// Landing Page Component
+function Landing() {
+  return (
+    <Box>
+      <Header />
+      <main>
+        <HeroSection />
+        <FeaturesSection />
+        <ProblemsPreviewSection />
+        {/* <TestimonialsSection /> */}
+        <CTASection />
+      </main>
+      <Footer />
     </Box>
   );
 }
