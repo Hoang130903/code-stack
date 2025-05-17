@@ -4,14 +4,15 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vinxi dev",
+		"dev": "vinxi dev --port 3002",
 		"build": "vinxi build",
 		"start": "vinxi start",
 		"format": "biome format",
 		"check": "biome check",
 		"lint": "biome lint",
 		"lint:fix": "biome check --fix --unsafe",
-		"postinstall": "npx prisma generate"
+		"postinstall": "npx prisma generate",
+		"theme-type-gen": "chakra typegen ./src/components/ui/theme.ts"
 	},
 	"dependencies": {
 		"@casl/ability": "^6.7.3",
@@ -42,6 +43,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
+		"@chakra-ui/cli": "^3.19.0",
 		"@eslint/js": "^9.22.0",
 		"@faker-js/faker": "^9.7.0",
 		"@types/node": "^22.14.1",
